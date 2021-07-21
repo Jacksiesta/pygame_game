@@ -1,18 +1,26 @@
 import pygame
-
+import io
 
 pygame.init()
-background_colour = (234, 212, 252)
   
-screen = pygame.display.set_mode((300, 300))
+disp_w = 800
+disp_h = 600
 
-pygame.display.set_caption('IS THIS WORKING')
+game_display = pygame.display.set_mode((disp_w,disp_h))
+pygame.display.set_caption('Is This Working?')
   
-# Fill the background colour to the screen
-screen.fill(background_colour)
-  
-# Update the full display Surface to the screen
-pygame.display.flip()
+black = (0,0,0)
+white = (255,255,255)
+
+racoon_img = pygame.image.load('racoon.jpeg')
+
+def racoon(x,y):
+    game_display.blit(racoon_img, (x,y))
+
+# define starting point of racoon
+x = (disp_w * 0.3)
+y = (disp_h * 0.5)
+    
 
 clock = pygame.time.Clock()
 
@@ -22,7 +30,14 @@ while not crashed:
     for event in pygame.event.get():  # all events registered in queue, use .get()
         if event.type == pygame.QUIT:  #  QUIT == close button, therefore terminate program
             crashed = True
-        print(event)
+        #print(event)
+
+    game_display.fill(white)
+    racoon(x,y)
+
     pygame.display.update()  # update portions of the screen for software displays
-    clock.tick(60)
+    clock.tick(60)   # 60 FPS
+
+pygame.quit()
+quit()
 
